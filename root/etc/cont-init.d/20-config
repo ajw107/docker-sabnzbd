@@ -1,33 +1,34 @@
 #!/usr/bin/with-contenv bash
 
+#Dont really need these here now, but you never know
 if [ -z "${CONFIG}" ]
 then
-    CONFIG=/config
+    CONFIG="/config"
 fi
 
 if [ -z "${APP_ROOT}" ]
 then
-    APP_ROOT=/app
+    APP_ROOT="/app"
 fi
 
 if [ -z "${APPDIRNAME}" ]
 then
-    APPDIRNAME=sabnzbd
+    APPDIRNAME="sabnzbd"
 fi
 
 if [ -z "${GITURL}" ]
 then
-    GITURL=https://github.com/sabnzbd/sabnzbd.git
+    GITURL="https://github.com/sabnzbd/sabnzbd.git"
 fi
 
 if [ -z "${GITBRANCH}" ]
 then
-    GITBRANCH=develop
+    GITBRANCH="develop"
 fi
 
 if [ -z "${APP_EXEC}" ]
 then
-    APP_EXEC=SABnzbd.py
+    APP_EXEC="SABnzbd.py"
 fi
 
 if [ -z "${APP_OPTS}" ]
