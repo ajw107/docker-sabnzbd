@@ -5,14 +5,14 @@ MAINTAINER sparklyballs
 ENV HOME="/config"
 ARG DEBIAN_FRONTEND="noninteractive"
 
-# install packages
+# install packages - changed to support using git version of sabnzbd
 RUN \
- echo "deb http://ppa.launchpad.net/jcfp/ppa/ubuntu xenial main" | tee -a /etc/apt/sources.list && \
- apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
+# echo "deb http://ppa.launchpad.net/jcfp/ppa/ubuntu xenial main" | tee -a /etc/apt/sources.list && \
+# apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
  apt-get update && \
  apt-get install -y \
 	p7zip-full \
-	sabnzbdplus \
+#	sabnzbdplus \
 	unrar \
 	unzip && \
 
@@ -28,4 +28,5 @@ COPY root/ /
 
 # ports and volumes
 EXPOSE 8080 9090
-VOLUME /config /downloads /incomplete-downloads
+#VOLUME /config /downloads /incomplete-downloads
+VOLUME /config /mnt
