@@ -27,6 +27,9 @@ RUN \
  apt-get install -y \
 	p7zip-full \
 #	sabnzbdplus \
+        python \
+	python-cheetah \
+	par2 \
 	unrar \
 	unzip \
 	nano \
