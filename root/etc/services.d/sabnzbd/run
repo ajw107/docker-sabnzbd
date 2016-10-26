@@ -1,9 +1,9 @@
 #!/usr/bin/with-contenv bash
 
-#variables set in /etc/cont-init.d/20 I think
-
+#variables set in Dockerfile
+cd "${APP_ROOT}/${APPDIRNAME}"
 exec \
-	s6-setuidgid abc "$APP_COMP" "$APPDIR/${APP_EXEC}" \
+	s6-setuidgid abc "$APP_COMP" "${APP_EXEC}" \
 	"$APP_OPTS"
 
 
