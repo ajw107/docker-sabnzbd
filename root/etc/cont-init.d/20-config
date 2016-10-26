@@ -10,9 +10,9 @@ then
     APP_ROOT=/app
 fi
 
-if [ -z "${GITBRANCH}" ]
+if [ -z "${APPDIRNAME}" ]
 then
-    APPDIR=/app/sabnzbd
+    APPDIRNAME=sabnzbd
 fi
 
 if [ -z "${GITURL}" ]
