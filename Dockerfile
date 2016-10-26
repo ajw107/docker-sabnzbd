@@ -7,8 +7,9 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 #make life easy for yourself
 ENV TERM=xterm-color
-RUN echo $'#!/bin/bash\nls -alF --color=auto --group-directories-first --time-style=+"%H:%M %d/%m/%Y" --block-size="\'1" $@' > /usr/bin/ll
-RUN chmod +x /usr/bin/ll
+#Very weird, this command works with alpine image, but not xenial
+#RUN echo $'#!/bin/bash\nls -alF --color=auto --group-directories-first --time-style=+"%H:%M %d/%m/%Y" --block-size="\'1" $@' > /usr/bin/ll
+#RUN chmod +x /usr/bin/ll
 
 # install packages - changed to support using git version of sabnzbd
 RUN \
@@ -32,6 +33,7 @@ RUN \
 
 # add local files
 COPY root/ /
+RUN chmod +x /usr/bin/ll
 
 # ports and volumes
 EXPOSE 8080 9090
