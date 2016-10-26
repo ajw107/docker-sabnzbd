@@ -3,7 +3,7 @@
 #variables set in /etc/cont-init.d/20 I think
 
 exec \
-	s6-setuidgid abc "$APP_ROOT/$APPDIRNAME/$APP_EXEC" \
+	s6-setuidgid abc "$APP_COMP" "$APPDIR/${APP_EXEC}" \
 	"$APP_OPTS"
 
 
