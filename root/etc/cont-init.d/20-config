@@ -62,4 +62,6 @@ fi
 chown -R abc:abc "$APP_ROOT"
 chown -R abc:abc "$CONFIG"
 
-exec /sbin/setuser abc "$APP_COMP" "$APPDIR/${APP_EXEC}" "$APP_OPTS"
+#fOpps, I orgot we're using s6 overlay, app should eb started as services in 
+#/etc/services.d/<APP_NAME>/run so s6 can watch over them and do it's magic
+#exec /sbin/setuser abc "$APP_COMP" "$APPDIR/${APP_EXEC}" "$APP_OPTS"
