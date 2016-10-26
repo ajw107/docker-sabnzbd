@@ -1,8 +1,16 @@
 FROM lsiobase/xenial
-MAINTAINER sparklyballs
+MAINTAINER sparklyballs, ajw107 (Alex Wood)
 
 # environment settings
-ENV HOME="/config"
+ENV CONFIG="/config"
+ENV APP_ROOT="/app"
+ENV APPDIRNAME="sabnzbd"
+ENV GITURL="https://github.com/sabnzbd/sabnzbd.git"
+ENV GITBRANCH="develop"
+ENV APP_EXEC="SABnzbd.py"
+ENV APP_OPTS="--config-file /config --server 0.0.0.0:8080"
+ENV APP_COMP="/usr/bin/python2.7"
+ENV HOME="${CONFIG}"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 #make life easy for yourself
@@ -38,4 +46,4 @@ RUN chmod +x /usr/bin/ll
 # ports and volumes
 EXPOSE 8080 9090
 #VOLUME /config /downloads /incomplete-downloads
-VOLUME /config /mnt
+VOLUME "${CONFIG}" /mnt
