@@ -1,12 +1,65 @@
 #!/usr/bin/with-contenv bash
 
-# make folders
-mkdir -p \
-	/downloads \
-	/incomplete-downloads
+if [ -z "${CONFIG}" ]
+then
+    CONFIG=/config
+fi
 
-# permissions
-chown abc:abc \
-	/downloads \
-	/incomplete-downloads
+if [ -z "${APP_ROOT}" ]
+then
+    APP_ROOT=/app
+fi
 
+if [ -z "${GITBRANCH}" ]
+then
+    APPDIR=/app/sabnzbd
+fi
+
+if [ -z "${GITURL}" ]
+then
+    GITURL=https://github.com/sabnzbd/sabnzbd.git
+fi
+
+if [ -z "${GITBRANCH}" ]
+then
+    GITBRANCH=develop
+fi
+
+if [ -z "${APP_EXEC}" ]
+then
+    APP_EXEC=SABnzbd.py
+fi
+
+if [ -z "${APP_OPTS}" ]
+then
+    APP_OPTS="--config-file /config --server 0.0.0.0:8080"
+fi
+
+if [ -z "${APP_COMP}" ]
+then
+    APP_COMP="/usr/bin/python2.7"
+fi
+
+####ALL user vars set up and checked now, I think.....
+
+# create folders
+mkdir -p "$APP_ROOT"
+mkdir -p "$CONFIG"
+#maybe should do /mnt and newgroup /folders, but too tired
+
+# install app
+if [[ -d "$APP_ROOT/$APPDIRNAME/.git" ]]
+then
+    cd "$APP_ROOT/$APPDIRNAME"
+    git stash
+    git checkout $GITBRANCH
+    git pull
+else
+    git clone $GITURL "$APP_ROOT/$APPDIRNAME" -b $GITBRANCH
+fi
+
+# permissions
+chown -R abc:abc "$APP_ROOT"
+chown -R abc:abc "$CONFIG"
+
+exec /sbin/setuser abc "$APP_COMP" "$APPDIR/${APP_EXEC}" "$APP_OPTS"
