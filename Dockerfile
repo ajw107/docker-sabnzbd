@@ -1,38 +1,31 @@
-FROM linuxserver/baseimage
-MAINTAINER Sparklyballs <sparklyballs@linuxserver.io>
+FROM lsiobase/xenial
+MAINTAINER sparklyballs
 
-ENV APTLIST="sabnzbdplus \
-unrar \
-wget"
+# environment settings
+ENV HOME="/config"
+ARG DEBIAN_FRONTEND="noninteractive"
 
-# Set the locale
-ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
-RUN locale-gen en_US.UTF-8
+# install packages
+RUN \
+ echo "deb http://ppa.launchpad.net/jcfp/ppa/ubuntu xenial main" | tee -a /etc/apt/sources.list && \
+ apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
+ apt-get update && \
+ apt-get install -y \
+	p7zip-full \
+	sabnzbdplus \
+	unrar \
+	unzip && \
 
-# install our compiled version of par2 multicore
-ADD deb/ /tmp/
-RUN apt-get update -q && \
-apt-get install libtbb2 -qy && \
-dpkg -i /tmp/par2-tbb_*.deb && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# cleanup
+ apt-get clean && \
+ rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/*
 
-# install main packages
-RUN add-apt-repository ppa:jcfp/ppa && \
-apt-get update -q && \
-apt-get install \
-$APTLIST -qy && \
-apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# add local files
+COPY root/ /
 
-# adding custom files
-ADD services/ /etc/service/
-ADD init/ /etc/my_init.d/
-RUN chmod -v +x /etc/service/*/run && chmod -v +x /etc/my_init.d/*.sh
-
-# set volumes
-VOLUME /config /downloads /incomplete-downloads
-
-# expose ports
+# ports and volumes
 EXPOSE 8080 9090
-
-
+VOLUME /config /downloads /incomplete-downloads
