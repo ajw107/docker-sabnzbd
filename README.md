@@ -27,6 +27,12 @@ docker create --name=sabnzbd \
 -v <path to downloads>:/downloads \
 -v <path to incomplete downloads>:/incomplete-downloads \
 -e PGID=<gid> -e PUID=<uid> \
+-e APP_EXEC=<App exec file> \
+-e APP_ROOT=<Where to put all the apps> \
+-e APPDIRNAME=<name of directory to put main app (child of APP_ROOT)> \
+-e APP_COMP=<Runtime Compiler to use, if any> \
+-e GITURL=<Clone url from git repo> \
+-e GITBRANCH=<Which branch to use> \
 -e TZ=<timezone> \
 -p 8080:8080 -p 9090:9090 \
 linuxserver/sabnzbd
