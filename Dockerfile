@@ -19,8 +19,8 @@ RUN \
 	p7zip-full \
 #	sabnzbdplus \
 	unrar \
-	unzip 
-	nano 
+	unzip \
+	nano \
 	git && \
 
 # cleanup
