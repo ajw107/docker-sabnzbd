@@ -33,7 +33,12 @@ RUN \
 	unrar \
 	unzip \
 	nano \
+        python-dev \
+        python-pip \
 	git && \
+
+pip install pip --upgrade && \
+pip install sabyenc --upgrade && \
 
 # cleanup
  apt-get clean && \
