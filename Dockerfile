@@ -11,6 +11,7 @@ ENV APP_EXEC="SABnzbd.py"
 ENV APP_OPTS="--config-file /config --server 0.0.0.0:8080"
 ENV APP_COMP="/usr/bin/python2.7"
 ENV HOME="${CONFIG}"
+ENV PYTHONIOENCODING="C.UTF-8"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 #make life easy for yourself
