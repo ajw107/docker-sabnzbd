@@ -30,18 +30,36 @@ RUN \
 #	sabnzbdplus \
         python \
 	python-cheetah \
-	par2 \
+#	par2 \
 	unrar \
 	unzip \
 	nano \
         python-dev \
         python-pip \
 	git \
-	libssl-dev && \
+	libssl-dev \
+	build-essential \
+	debhelper \
+	devscripts \
+	dh-autoreconf \
+	libtbb-dev \
+	libtbb2 && \
 
 pip install pip --upgrade && \
 pip install sabyenc --upgrade && \
 pip install cryptography --upgrade && \
+
+# compile par2 multicore
+apt-get remove -y par2 && \
+git clone https://github.com/jcfp/debpkg-par2tbb.git /tmp/par2 && \
+cd /tmp/par2 && \
+uscan --force-download && \
+dpkg-buildpackage -S -us -uc -d && \
+dpkg-source -x ../par2cmdline-tbb_*.dsc && \
+cd /tmp/par2/par2cmdline-tbb-* && \
+dpkg-buildpackage -b -us -uc && \
+dpkg -i $(readlink -f ../par2-tbb_*.deb) && \
+cd / && \
 
 # cleanup
  apt-get clean && \
