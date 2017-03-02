@@ -43,14 +43,17 @@ RUN \
 	devscripts \
 	dh-autoreconf \
 	libtbb-dev \
-	libtbb2 && \
+	libtbb2
 
+RUN \
 pip install pip --upgrade && \
 pip install sabyenc --upgrade && \
-pip install cryptography --upgrade && \
+pip install cryptography --upgrade
 
 # compile par2 multicore
-apt-get remove -y par2 && \
+RUN \
+apt-get remove -y par2
+RUN \
 git clone https://github.com/jcfp/debpkg-par2tbb.git /tmp/par2 && \
 cd /tmp/par2 && \
 uscan --force-download && \
@@ -59,9 +62,10 @@ dpkg-source -x ../par2cmdline-tbb_*.dsc && \
 cd /tmp/par2/par2cmdline-tbb-* && \
 dpkg-buildpackage -b -us -uc && \
 dpkg -i $(readlink -f ../par2-tbb_*.deb) && \
-cd / && \
+cd /
 
 # cleanup
+RUN \
  apt-get clean && \
  rm -rf \
 	/tmp/* \
