@@ -35,10 +35,12 @@ RUN \
 	nano \
         python-dev \
         python-pip \
-	git && \
+	git \
+	libssl-dev && \
 
 pip install pip --upgrade && \
 pip install sabyenc --upgrade && \
+pip install cryptography --upgrade && \
 
 # cleanup
  apt-get clean && \
