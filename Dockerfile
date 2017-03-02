@@ -2,6 +2,7 @@ FROM lsiobase/xenial
 MAINTAINER sparklyballs, ajw107 (Alex Wood)
 
 # environment settings
+ARG DEBIAN_FRONTEND="noninteractive"
 ENV CONFIG="/config"
 ENV APP_ROOT="/app"
 ENV APPDIRNAME="sabnzbd"
@@ -12,7 +13,6 @@ ENV APP_OPTS="--config-file /config --server 0.0.0.0:8080"
 ENV APP_COMP="/usr/bin/python2.7"
 ENV HOME="${CONFIG}"
 ENV PYTHONIOENCODING="C.UTF-8"
-ARG DEBIAN_FRONTEND="noninteractive"
 
 #make life easy for yourself
 ENV TERM=xterm-color
