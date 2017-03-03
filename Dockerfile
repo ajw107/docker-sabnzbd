@@ -12,7 +12,7 @@ ENV APP_EXEC="SABnzbd.py"
 ENV APP_OPTS="--config-file ${CONFIG} --server 0.0.0.0:8080"
 ENV APP_COMP="/usr/bin/python2.7"
 ENV HOME="${CONFIG}"
-ENV PYTHONIOENCODING="C.UTF-8"
+ENV PYTHONIOENCODING="UTF-8"
 
 #make life easy for yourself
 ENV TERM=xterm-color
@@ -22,15 +22,11 @@ ENV TERM=xterm-color
 
 # install packages - changed to support using git version of sabnzbd
 RUN \
-# echo "deb http://ppa.launchpad.net/jcfp/ppa/ubuntu xenial main" | tee -a /etc/apt/sources.list && \
-# apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
  apt-get update && \
  apt-get install -y \
 	p7zip-full \
-#	sabnzbdplus \
         python \
 	python-cheetah \
-#	par2 \
 	unrar \
 	unzip \
 	nano \
