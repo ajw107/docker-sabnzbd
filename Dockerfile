@@ -13,7 +13,7 @@ ENV APP_OPTS="--config-file ${CONFIG} --server 0.0.0.0:8080"
 ENV APP_COMP="/usr/bin/python2.7"
 ENV HOME="${CONFIG}"
 ENV PYTHONIOENCODING="UTF-8"
-ENV UTF_ENC=C.UTF-8
+ENV LANG=C.UTF-8
 
 #make life easy for yourself
 ENV TERM=xterm-color
