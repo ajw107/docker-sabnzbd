@@ -48,7 +48,7 @@ RUN \
  add-apt-repository -y ppa:jcfp/sab-addons && \
  apt-get update && \
  apt-get install -y python-sabyenc \
-                    par2cmdline-tbb
+                    par2-tbb
 
 #RUN \
 #pip install pip --upgrade && \
