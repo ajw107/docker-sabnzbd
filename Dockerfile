@@ -27,39 +27,47 @@ RUN \
  apt-get install -y \
 	p7zip-full \
         python \
-	python-cheetah \
+#	python-cheetah \
 	unrar \
 	unzip \
 	nano \
-        python-dev \
-        python-pip \
+#        python-dev \
+#        python-pip \
 	git \
-	libssl-dev \
-	build-essential \
-	debhelper \
-	devscripts \
-	dh-autoreconf \
-	libtbb-dev \
-	libtbb2
+#	libssl-dev \
+#	build-essential \
+#	debhelper \
+#	devscripts \
+#	dh-autoreconf \
+#	libtbb-dev \
+#	libtbb2 \
+        software-properties-common \
+        python-cryptography
 
 RUN \
-pip install pip --upgrade && \
-pip install sabyenc --upgrade && \
-pip install cryptography --upgrade
+ add-apt-repository -y ppa:jcfp/sab-addons && \
+ apt-get update && \
+ apt-get install -y python-sabyenc \
+                    par2cmdline-tbb
+
+#RUN \
+#pip install pip --upgrade && \
+#pip install sabyenc --upgrade && \
+#pip install cryptography --upgrade
 
 # compile par2 multicore
-RUN \
-apt-get remove -y par2
-RUN \
-git clone https://github.com/jcfp/debpkg-par2tbb.git /tmp/par2 && \
-cd /tmp/par2 && \
-uscan --force-download && \
-dpkg-buildpackage -S -us -uc -d && \
-dpkg-source -x ../par2cmdline-tbb_*.dsc && \
-cd /tmp/par2/par2cmdline-tbb-* && \
-dpkg-buildpackage -b -us -uc && \
-dpkg -i $(readlink -f ../par2-tbb_*.deb) && \
-cd /
+#RUN \
+#apt-get remove -y par2
+#RUN \
+#git clone https://github.com/jcfp/debpkg-par2tbb.git /tmp/par2 && \
+#cd /tmp/par2 && \
+#uscan --force-download && \
+#dpkg-buildpackage -S -us -uc -d && \
+#dpkg-source -x ../par2cmdline-tbb_*.dsc && \
+#cd /tmp/par2/par2cmdline-tbb-* && \
+#dpkg-buildpackage -b -us -uc && \
+#dpkg -i $(readlink -f ../par2-tbb_*.deb) && \
+#cd /
 
 # cleanup
 RUN \
