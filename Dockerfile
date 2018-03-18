@@ -27,7 +27,7 @@ RUN \
  apt-get install -y \
 	p7zip-full \
         python \
-#	python-cheetah \
+	python-cheetah \
 	unrar \
 	unzip \
 	nano \
