@@ -21,37 +21,39 @@ ENV TERM=xterm-color
 #RUN echo $'#!/bin/bash\nls -alF --color=auto --group-directories-first --time-style=+"%H:%M %d/%m/%Y" --block-size="\'1" $@' > /usr/bin/ll
 #RUN chmod +x /usr/bin/ll
 
+#Notes for when Python 3 is rolled out:
+#apt-get install additional:
+#                       python3-pip \
+#                       libffi-dev \
+
+#RUN \
+#   git clone https://github.com/sabnzbd/sabnzbd.git && \
+#   cd sabnzbd && \
+#   git checkout py3 && \
+#   pip3 install pip --upgrade && \
+#   pip3 install -r requirements.txt -U
+
 # install packages - changed to support using git version of sabnzbd
 RUN \
  apt-get update && \
  apt-get install -y \
 	p7zip-full \
-        python \
-	python-cheetah \
+        python \ #Remove for python 3
+	python-cheetah \ #Remove for python 3
 	unrar \
 	unzip \
 	nano \
-#        python-dev \
-#        python-pip \
 	git \
-#	libssl-dev \
-#	build-essential \
-#	debhelper \
-#	devscripts \
-#	dh-autoreconf \
-#	libtbb-dev \
-#	libtbb2 \
-        software-properties-common \
-        python-cryptography
+    software-properties-common \
+    python-cryptography #Remove for python 3
 
-RUN \
+RUN \ #Review on update to Python 3 (ie is this using the python 3 versions or is requirements.txt enough)
  add-apt-repository -y ppa:jcfp/sab-addons && \
  apt-get update && \
  apt-get install -y python-sabyenc \
                     par2-tbb
 
-#RUN \
-#pip install pip --upgrade && \
+#RUN \ 
 #pip install sabyenc --upgrade && \
 #pip install cryptography --upgrade
 
@@ -73,9 +75,9 @@ RUN \
 RUN \
  apt-get clean && \
  rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
 
 # add local files
 COPY root/ /
