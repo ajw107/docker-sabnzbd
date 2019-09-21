@@ -33,35 +33,35 @@ fi
 
 if [ -z "${APP_OPTS}" ]
 then
-    APP_OPTS="--config-file /config --server 0.0.0.0:8080"
+    APP_OPTS="--browser 0 --config-file /config --server 0.0.0.0:8080"
 fi
 
 if [ -z "${APP_COMP}" ]
 then
-    APP_COMP="/usr/bin/python2.7"
+    APP_COMP="/usr/bin/python3"
 fi
 
 ####ALL user vars set up and checked now, I think.....
 
 # create folders
-mkdir -p "$APP_ROOT"
-mkdir -p "$CONFIG"
+mkdir -p "${APP_ROOT}"
+mkdir -p "${CONFIG}"
 #maybe should do /mnt and newgroup /folders, but too tired
 
 # install app
-if [[ -d "$APP_ROOT/$APPDIRNAME/.git" ]]
+if [[ -d "${APP_ROOT}/${APPDIRNAME}/.git" ]]
 then
-    cd "$APP_ROOT/$APPDIRNAME"
+    cd "${APP_ROOT}/${APPDIRNAME}"
     git stash
-    git checkout $GITBRANCH
+    git checkout ${GITBRANCH}
     git pull
 else
-    git clone $GITURL "$APP_ROOT/$APPDIRNAME" -b $GITBRANCH
+    git clone ${GITURL} "${APP_ROOT}/{$APPDIRNAME}" --branch ${GITBRANCH}
 fi
 
 # permissions
-chown -R abc:abc "$APP_ROOT"
-chown -R abc:abc "$CONFIG"
+chown -R abc:abc "${APP_ROOT}"
+chown -R abc:abc "${CONFIG}"
 
 #fOpps, I orgot we're using s6 overlay, app should eb started as services in 
 #/etc/services.d/<APP_NAME>/run so s6 can watch over them and do it's magic

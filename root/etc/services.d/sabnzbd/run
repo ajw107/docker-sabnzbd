@@ -4,6 +4,6 @@ umask 022
 
 #variables set in Dockerfile
 cd "${APP_ROOT}/${APPDIRNAME}"
-cmd="s6-setuidgid abc $APP_COMP $APP_EXEC $APP_OPTS"
-echo "Executing: [$cmd]"
-exec $cmd
+cmd="s6-setuidgid abc ${APP_COMP} ${APP_EXEC} ${APP_OPTS}"
+echo "Executing: [${cmd}]"
+exec ${cmd}
